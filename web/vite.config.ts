@@ -4,6 +4,8 @@ import type { ConfigEnv, UserConfig } from 'vite'
 import { loadEnv } from 'vite'
 import { svgBuilder } from '/@/components/icon/svg/index'
 import { customHotUpdate, isProd } from '/@/utils/vite'
+import vueJsx from '@vitejs/plugin-vue-jsx'
+import vueDevTools from 'vite-plugin-vue-devtools'
 
 const pathResolve = (dir: string): any => {
     return resolve(__dirname, '.', dir)
@@ -20,7 +22,7 @@ const viteConfig = ({ mode }: ConfigEnv): UserConfig => {
     }
 
     return {
-        plugins: [vue(), svgBuilder('./src/assets/icons/'), customHotUpdate()],
+        plugins: [vue(), vueJsx(), vueDevTools(), svgBuilder('./src/assets/icons/'), customHotUpdate()],
         root: process.cwd(),
         resolve: { alias },
         base: VITE_BASE_PATH,
